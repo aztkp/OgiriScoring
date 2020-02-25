@@ -1,7 +1,11 @@
+# 実行例
+<img src='sample/1.png' width=360> <img src='sample/2.png' width=360>
+ <img src='sample/3.png' width=360>
+
 # 動作環境
 Java version 1.8.0  
 
-# 実行  
+# 実行    
 javac -encoding UTF-8 IpponApplet.java  
 appletviewer ippon.html
 
