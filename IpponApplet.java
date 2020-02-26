@@ -8,11 +8,38 @@ import java.applet.AudioClip;
 import java.io.File;
 import java.net.MalformedURLException;
 
-
 public class IpponApplet extends Applet {
   int default_point = 0; // 下駄はかせるときはここ
   int playerNum = 5; // 人数変更するときはここ
   int match = 1; // 何試合目か
+
+  // プレイヤー設定
+  String[] playerName = {
+    "",
+    "",
+    "",
+    "",
+    "", // ここまで1回戦
+    "",
+    "",
+    "",
+    "",
+    "", // ここまで2回戦
+    "",
+    "",
+    "",
+    "",
+    "" // ここまで3回戦
+  };
+
+  //お題設定
+  String[] odai = {
+    "お題Aお題Aお題Aお題Aお題Aお題Aお題Aお題Aお題Aお題A",
+    "お題Bお題Bお題Bお題Bお題Bお題Bお題Bお題Bお題Bお題B",
+    "お題Cお題Cお題Cお題Cお題Cお題Cお題Cお題Cお題Cお題C",
+    "お題Dお題Dお題Dお題Dお題Dお題Dお題Dお題Dお題Dお題D",
+    "お題Eお題Eお題Eお題Eお題Eお題Eお題Eお題Eお題Eお題E"
+  };
 
   int count=0;
   int playerCount=-1;
@@ -20,13 +47,11 @@ public class IpponApplet extends Applet {
   int stroke=14;
 
   int odaiNum = 0;
-  String odai[] = new String[4];
-
   Image point[] = new Image[11];
   Image player[] = new Image[playerNum];
   int playerPoint[] = new int[playerNum];
 
-  AudioClip audioClip[] = new AudioClip[11];
+  AudioClip audioClip[] = new AudioClip[12];
 
   Dimension size;
   Image back;
@@ -50,39 +75,15 @@ public class IpponApplet extends Applet {
       for (int i=1; i<11; i++) {
         audioClip[i] = Applet.newAudioClip(IpponApplet.class.getResource("snd/"+i+".wav"));
       }
+      audioClip[11] = Applet.newAudioClip(IpponApplet.class.getResource("snd/answer.wav"));
    } catch (Exception e) {
 
    }
-   // お題デバッグ
-   // odai.setFont(new Font("SansSerif",Font.BOLD,40));
-   // odai.setBackground(Color.black);
-   // odai.setForeground(Color.white);
-   // add(odai);
 
-    if (match == 1) {
-      player[0] =  getImage(getDocumentBase(),"player/a.png");
-      player[1] =  getImage(getDocumentBase(),"player/b.png");
-      player[2] =  getImage(getDocumentBase(),"player/c.png");
-      player[3] =  getImage(getDocumentBase(),"player/d.png");
-      player[4] =  getImage(getDocumentBase(),"player/e.png");
-    } else if (match == 2) {
-      player[0] =  getImage(getDocumentBase(),"player/f.png");
-      player[1] =  getImage(getDocumentBase(),"player/g.png");
-      player[2] =  getImage(getDocumentBase(),"player/h.png");
-      player[3] =  getImage(getDocumentBase(),"player/i.png");
-      player[3] =  getImage(getDocumentBase(), "player/j.png");
-    } else {
-      player[0] =  getImage(getDocumentBase(),"player/k.png");
-      player[1] =  getImage(getDocumentBase(),"player/lpng");
-      player[2] =  getImage(getDocumentBase(),"player/m.png");
-      player[3] =  getImage(getDocumentBase(),"player/n.png");
-      player[3] =  getImage(getDocumentBase(), "player/o.png");
+   // 画像表示
+    for (int i=(match-1)*5; i<(match-1)*5+5; i++) {
+      player[i] =  getImage(getDocumentBase(),"player/"+playerName[i]+".png");
     }
-
-    // お題設定・
-    odai[0] = "お題Aお題Aお題Aお題Aお題Aお題Aお題Aお題A";
-    odai[1] = "お題Bお題Bお題Bお題Bお題Bお題Bお題Bお題B";
-    odai[2] = "お題Cお題Cお題Cお題Cお題Cお題Cお題Cお題C";
 
     resize(1366, 768);
 
@@ -109,15 +110,40 @@ public class IpponApplet extends Applet {
             case 40: // down
               if (count>0) count--; break;
             case 49: // 1
-              playerCount = 0; break;
+              if (playerCount == -1) {
+                playerCount = 0;
+                audioClip[11].stop();
+                audioClip[11].play();
+              }
+              break;
             case 50: // 2
-              playerCount = 1; break;
+              if (playerCount == -1) {
+                playerCount = 1;
+                audioClip[11].stop();
+                audioClip[11].play();
+              }
+              break;
             case 51: // 3
-              playerCount = 2; break;
+              if (playerCount == -1) {
+                playerCount = 2;
+                audioClip[11].stop();
+                audioClip[11].play();
+              }
+              break;
             case 52: // 4
-              playerCount = 3; break;
+              if (playerCount == -1) {
+                playerCount = 3;
+                audioClip[11].stop();
+                audioClip[11].play();
+              }
+              break;
             case 53: // 5
-              playerCount = 4; break;
+              if (playerCount == -1) {
+                playerCount = 4;
+                audioClip[11].stop();
+                audioClip[11].play();
+              }
+              break;
             case 66: // back space
               if(odaiNum>0) odaiNum--; break;
             case 74: // j

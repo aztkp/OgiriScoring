@@ -5,9 +5,12 @@
 # 動作環境
 Java version 1.8.0  
 
-# 実行    
-javac -encoding UTF-8 IpponApplet.java  
-appletviewer ippon.html
+# 実行
+- playerNum配列にプレイヤー名を設定
+- playerフォルダに"プレイヤー名.png"を配置
+- odai配列にお題を設定
+- javac -encoding UTF-8 IpponApplet.java  
+- appletviewer ippon.html
 
 # 基本操作  
 
